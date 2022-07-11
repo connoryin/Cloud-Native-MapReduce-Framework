@@ -1,0 +1,12 @@
+.idea/
+cmake-build-debug/
+CMakeFiles/
+/src/master/master
+/src/worker/worker
+Makefile
+.cmake/
+Testing/
+.vscode/
+/build/
+.ninja_deps
+.ninja_log

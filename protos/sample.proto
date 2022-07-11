@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package Mapreduce;
+
+service Task {
+  rpc Map (MapRequest) returns (Reply) {}
+  rpc Reduce (ReduceRequest) returns (Reply) {}
+  rpc Sync (SyncReq) returns (Reply) {}
+  rpc TaskBegin (TaskBeginRequest) returns (Reply) {}
+  rpc TaskEnd (Reply) returns (Reply) {}
+}
+
+message MapRequest {
+  int32 requestID = 1;
+  string containerName = 2;
+  int32 nReduce = 3;
+}
+
+message ReduceRequest {
+  int32 requestID = 1;
+  string containerName = 2;
+  int32 nMap = 3;
+}
+
+message TaskBeginRequest {
+    int32 nMap = 1;
+    int32 nReduce = 2;
+    string containerName = 3;
+}
+
+message SyncReq {
+  bool mapPhase = 1;
+  repeated bool MapFinished= 2;
+  repeated bool ReduceFinished= 3;
+}
+
+message Reply {
+}

@@ -1,0 +1,14 @@
+FROM ubuntu:latest
+RUN apt-get update
+RUN apt-get install -y ca-certificates zookeeper libzookeeper-mt2 zookeeperd zookeeper-bin libzookeeper-mt-dev
+RUN apt-get install -y libboost-all-dev libwebsocketpp-dev openssl libssl-dev ninja-build libxml2-dev uuid-dev libunittest++-dev
+# Define the rest of your dockerfile here
+COPY src/worker/worker .
+COPY lib/libglog.so.1 /usr/local/lib/
+COPY lib/libconservator-framework.so /usr/local/lib/
+COPY lib/libcpprest.so.2.10 /usr/local/lib/
+COPY lib/libazurestorage.so.7 /usr/local/lib/
+COPY src/worker/mapper.py .
+COPY src/worker/reducer.py .
+CMD ["./worker"]
+EXPOSE 50051
